@@ -7,11 +7,12 @@
 //
 
 #import "KTDMapViewController.h"
-#import <DMap/DMap-Swift.h>
-//#import "DMap-Swift.h"
+//#import <DMap/DMap-Swift.h>
+//#import<DMap/DMap-Swift.h>
+@import DMap;
 #import <WebKit/WebKit.h>
 @interface KTDMapViewController ()<DMapDelegate>
-@property(nonatomic,strong)DMap *map;
+@property(nonatomic,retain)DMap *map;
 @property(nonatomic,copy)NSString *code;
 @property(nonatomic,copy)NSString *url;
 @end
