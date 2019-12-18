@@ -27,3 +27,16 @@ pod 'KTMapSDK'
 ## License
 
 KTMapSDK is available under the MIT license. See the LICENSE file for more info.
+
+
+//集成
+pod 'KTMapSDK'
+
+
+//需要在plist 文件内添加这三个权限
+Privacy - Bluetooth Always Usage Description
+Privacy - Location Always and When In Use Usage Description
+Privacy - Location When In Use Usage Description
+
+// 传入一个viewController 以及高德APIKey
+[KTMapSDK presentSDK:self mapAPIKey:@""];

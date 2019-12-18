@@ -30,7 +30,7 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '8.0'
 
-  s.source_files = 'KTMapSDK/Classes/**/*'
+  s.source_files = 'KTMapSDK/Classes/**'
   s.resource = 'KTMapSDK/Assets/*'
   # s.resource_bundles = {
   #   'KTMapSDK' => ['KTMapSDK/Assets/*.png']

@@ -333,6 +333,7 @@
 				"${PODS_ROOT}/AMap3DMap/MAMapKit.framework/AMap.bundle",
 				"${PODS_ROOT}/AMapNavi/AMapNaviKit.framework/AMapNavi.bundle",
 				"${PODS_ROOT}/HTCKeyboard/HTCKeyboard/HTCKeyboardRes.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardManager/IQKeyboardManager.bundle",
 				"${PODS_ROOT}/../../KTMapSDK/Assets/KTRes.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 			);
@@ -343,6 +344,7 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMap.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AMapNavi.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/HTCKeyboardRes.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/IQKeyboardManager.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/KTRes.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
 			);
