@@ -8,7 +8,7 @@
 
 #import "KTNaviWalkController.h"
 #import <MapKit/MapKit.h>
-#import "KTDMapViewController.h"
+
 #import <AMapNaviKit/AMapNaviKit.h>
 #import "SpeechSynthesizer.h"
 @interface KTNaviWalkController ()<AMapNaviWalkManagerDelegate,AMapNaviWalkViewDelegate>
