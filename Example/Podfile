@@ -1,0 +1,13 @@
+
+
+platform :ios, '10.0'
+
+target 'KTMapSDK_Example' do
+  pod 'KTMapSDK', :path => '../'
+
+  target 'KTMapSDK_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end

@@ -1,0 +1,66 @@
+PODS:
+  - AFNetworking (3.2.1):
+    - AFNetworking/NSURLSession (= 3.2.1)
+    - AFNetworking/Reachability (= 3.2.1)
+    - AFNetworking/Security (= 3.2.1)
+    - AFNetworking/Serialization (= 3.2.1)
+    - AFNetworking/UIKit (= 3.2.1)
+  - AFNetworking/NSURLSession (3.2.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (3.2.1)
+  - AFNetworking/Security (3.2.1)
+  - AFNetworking/Serialization (3.2.1)
+  - AFNetworking/UIKit (3.2.1):
+    - AFNetworking/NSURLSession
+  - AMap3DMap (7.1.0):
+    - AMapFoundation (~> 1.5)
+  - AMapFoundation (1.6.1)
+  - AMapNavi (7.1.0):
+    - AMap3DMap (~> 7.0)
+    - AMapFoundation (~> 1.5)
+  - DMapFramework (0.1.0)
+  - HTCKeyboard (0.0.2)
+  - KTMapSDK (0.1.0):
+    - AFNetworking
+    - AMapNavi
+    - DMapFramework
+    - HTCKeyboard
+    - Masonry
+    - SVProgressHUD
+  - Masonry (1.1.0)
+  - SVProgressHUD (2.2.5)
+
+DEPENDENCIES:
+  - KTMapSDK (from `../`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AFNetworking
+    - AMap3DMap
+    - AMapFoundation
+    - AMapNavi
+    - DMapFramework
+    - HTCKeyboard
+    - Masonry
+    - SVProgressHUD
+
+EXTERNAL SOURCES:
+  KTMapSDK:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
+  AMap3DMap: ef26e2fb120ae9f1635b4b26b28df6d1379a05f0
+  AMapFoundation: df9a0ceec845ae2b5f57bdf9884666f2ed73bf5b
+  AMapNavi: 28a5c56377342428a7381ac6abab286ff33c6251
+  DMapFramework: c009229a00def5d97a54bf7d9c3a735d781ae601
+  HTCKeyboard: 502cb754051b7a4f81f4e473bc2c7ef3e5dae337
+  KTMapSDK: 01e061abe6cf1c4edeadfd43eb8440a548fd1d69
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
+
+PODFILE CHECKSUM: 270c3fa26ab886f1b7e49d4ef37786f3552304c1
+
+COCOAPODS: 1.6.1
