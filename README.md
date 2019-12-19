@@ -7,7 +7,9 @@
 
 ## Example
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+pod spec lint KTMapSDK.podspec --verbose --use-libraries --allow-warnings --no-clean
+
+pod trunk push KTMapSDK.podspec --verbose --use-libraries --allow-warnings --no-clean
 
 ## Requirements
 

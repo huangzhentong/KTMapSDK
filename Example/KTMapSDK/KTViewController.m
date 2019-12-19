@@ -25,6 +25,7 @@
 {
 //    KTDMapViewController *viewController =[[KTDMapViewController alloc] initWithCode:@"hyjg" withURL:@"https://test.seeklane.com/test/hyjg/index.html"];
 //    [self presentViewController:viewController animated:true completion:nil];
+    
     [KTMapSDK presentSDK:self mapAPIKey:@""];
     
 }
