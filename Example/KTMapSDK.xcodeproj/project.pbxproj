@@ -66,7 +66,7 @@
 		814971C03DD388D162B7CB73 /* Pods-KTMapSDK_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KTMapSDK_Example.debug.xcconfig"; path = "Target Support Files/Pods-KTMapSDK_Example/Pods-KTMapSDK_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		C3B441F55C88C4F7036543B5 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		E419FA99D63E6BC1D42E3D4F /* KTMapSDK.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = KTMapSDK.podspec; path = ../KTMapSDK.podspec; sourceTree = "<group>"; };
+		E419FA99D63E6BC1D42E3D4F /* KTMapSDK.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = KTMapSDK.podspec; path = ../KTMapSDK.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

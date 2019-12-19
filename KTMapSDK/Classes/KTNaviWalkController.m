@@ -8,13 +8,16 @@
 
 #import "KTNaviWalkController.h"
 #import <MapKit/MapKit.h>
-
+#import <Masonry.h>
 #import <AMapNaviKit/AMapNaviKit.h>
-#import "SpeechSynthesizer.h"
+
 @interface KTNaviWalkController ()<AMapNaviWalkManagerDelegate,AMapNaviWalkViewDelegate>
 @property(nonatomic,strong)AMapNaviWalkView *driveView;
 @property(nonatomic,strong)AMapNaviPoint *endPoint;
 @property(nonatomic,strong)AMapNaviWalkManager *walkManager;
+
+@property(nonatomic,strong)UIView *endView;
+
 @end
 
 @implementation KTNaviWalkController
@@ -29,9 +32,43 @@
     return self;
 }
 
+-(UIView*)endView
+{
+    if(!_endView)
+    {
+        _endView = [UIView new];
+        _endView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+        [self.view addSubview:_endView];
+        _endView.frame = self.view.bounds;
+        
+        UIButton *closeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [closeBtn setTitle:@"已到达，切换至室内导航" forState:UIControlStateNormal];
+        [closeBtn setBackgroundColor: [UIColor colorWithRed:25/255.0 green:64/255.0 blue:215/255.0 alpha:1.0]];
+        closeBtn.layer.cornerRadius = 23.5;
+        [_endView addSubview:closeBtn];
+        [closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(_endView.mas_centerX);
+            make.height.mas_equalTo(47);
+            make.width.equalTo(_endView.mas_width).multipliedBy(0.7);
+            make.bottom.mas_equalTo(-100);
+            
+        }];
+        [closeBtn addTarget:self action:@selector(closeBtnEvent) forControlEvents:UIControlEventTouchUpInside];
+        
+    }
+    return _endView;
+}
+
+
+-(void)closeBtnEvent
+{
+    [self stopNavi];
+    [self.navigationController popViewControllerAnimated:true];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    self.navigationController.navigationBarHidden = true;
     [AMapServices sharedServices].apiKey = @"745dc31cded658ccfedfdc33684a75eb";
     [AMapServices sharedServices].enableHTTPS = YES;
     
@@ -45,7 +82,15 @@
     if(!self.endPoint)
         [self initProperties];
     [self.walkManager calculateWalkRouteWithEndPoints:@[self.endPoint]];
-   
+    [self addListen];
+}
+-(void)addListen{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inputInDoor) name:@"inputInDoor" object:nil];
+}
+//进入室入
+-(void)inputInDoor{
+    
+    
 }
 
 - (void)initDriveView
@@ -71,11 +116,22 @@
     {
         self.walkManager = [[AMapNaviWalkManager alloc] init];
         [self.walkManager setDelegate:self];
+        self.walkManager.isUseInternalTTS = true;
         [self.walkManager addDataRepresentative:self.driveView];
     }
 }
 
-
+-(void)stopNavi{
+    [self.walkManager stopNavi];
+    [self.walkManager removeDataRepresentative:self.driveView];
+    [self.walkManager setDelegate:nil];
+}
+#pragma makr -
+- (void)walkViewCloseButtonClicked:(AMapNaviWalkView *)walkView
+{
+    [self.navigationController popViewControllerAnimated:true];
+}
+#pragma mark -
 
 - (void)walkManagerOnCalculateRouteSuccess:(AMapNaviWalkManager *)walkManager
 {
@@ -104,7 +160,7 @@
 - (void)walkManager:(AMapNaviWalkManager *)walkManager playNaviSoundString:(NSString *)soundString soundStringType:(AMapNaviSoundType)soundStringType
 {
     NSLog(@"playNaviSoundString:{%ld:%@}", (long)soundStringType, soundString);
-     [[SpeechSynthesizer sharedSpeechSynthesizer] speakString:soundString];
+     
 }
 
 - (void)walkManagerDidEndEmulatorNavi:(AMapNaviWalkManager *)walkManager
@@ -118,8 +174,6 @@
 }
 - (void)dealloc
 {
-    [self.walkManager stopNavi];
-    [self.walkManager removeDataRepresentative:self.driveView];
-    [self.walkManager setDelegate:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 @end
