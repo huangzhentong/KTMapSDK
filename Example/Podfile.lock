@@ -23,7 +23,7 @@ PODS:
   - DMapFramework (0.1.0)
   - HTCKeyboard (0.0.2)
   - IQKeyboardManager (6.5.4)
-  - KTMapSDK (0.1.0):
+  - KTMapSDK (0.1.2):
     - AFNetworking
     - AMapNavi
     - DMapFramework
@@ -38,7 +38,7 @@ DEPENDENCIES:
   - KTMapSDK (from `../`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - AFNetworking
     - AMap3DMap
     - AMapFoundation
@@ -61,10 +61,10 @@ SPEC CHECKSUMS:
   DMapFramework: c009229a00def5d97a54bf7d9c3a735d781ae601
   HTCKeyboard: 502cb754051b7a4f81f4e473bc2c7ef3e5dae337
   IQKeyboardManager: 72b359cd7e777e3a984cedbe05f8da45320cbb63
-  KTMapSDK: e4aa42d716a676ccef3d17308c5863b384631549
+  KTMapSDK: 34a1ff9bffaa9f0882921ce221a9ea6bb72e2b6c
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
 PODFILE CHECKSUM: 270c3fa26ab886f1b7e49d4ef37786f3552304c1
 
-COCOAPODS: 1.6.1
+COCOAPODS: 1.9.0.beta.2
