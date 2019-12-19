@@ -7,10 +7,12 @@
 //
 
 #import "KTDMapViewController.h"
-#import <DMap/DMap-Swift.h>
+//#import <DMap/DMap-Swift.h>
 #import <WebKit/WebKit.h>
-@interface KTDMapViewController ()<DMapDelegate>
-@property(nonatomic,strong)DMap *map;
+#import <objc/runtime.h>
+#import <objc/message.h>
+@interface KTDMapViewController ()
+//@property(nonatomic,strong)DMap *map;
 @property(nonatomic,copy)NSString *code;
 @property(nonatomic,copy)NSString *url;
 @end
@@ -29,50 +31,67 @@
     return self;
 }
 
--(DMap*)map
-{
-    if (!_map) {
-        _map = [[DMap alloc] initWithView:self.view];
-       
-        [_map setSourceWithType:0 source:self.code url:self.url];
-        [_map registerLocationStatusEventWithCb:^(NSDictionary<NSString *,id> * _Nullable dic) {
-            NSLog(@"registerLocationStatusEventWithCb = %@", dic);
-        }];
-        [_map registerNavigationDistanceEventWithCb:^(NSDictionary<NSString *,id> * _Nullable dic) {
-             NSLog(@"registerNavigationDistanceEventWithCb = %@", dic);
-        }];
-        WKWebView *webView = [_map getMapView];
-        webView.translatesAutoresizingMaskIntoConstraints = false;
-        webView.frame = self.view.bounds;
-        
-    }
-    return _map;
-}
+//-(DMap*)map
+//{
+//    if (!_map) {
+//        _map = [[DMap alloc] initWithView:self.view];
+//
+//        [_map setSourceWithType:0 source:self.code url:self.url];
+//        [_map registerLocationStatusEventWithCb:^(NSDictionary<NSString *,id> * _Nullable dic) {
+//            NSLog(@"registerLocationStatusEventWithCb = %@", dic);
+//        }];
+//        [_map registerNavigationDistanceEventWithCb:^(NSDictionary<NSString *,id> * _Nullable dic) {
+//             NSLog(@"registerNavigationDistanceEventWithCb = %@", dic);
+//        }];
+//        WKWebView *webView = [_map getMapView];
+//        webView.translatesAutoresizingMaskIntoConstraints = false;
+//        webView.frame = self.view.bounds;
+//
+//    }
+//    return _map;
+//}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.map.delegate = self;
+    
+    Class mapClass = NSClassFromString(@"DMap.DMap");
+       if (mapClass) {
+          
+           id (*allocAction)(id,SEL) = (id (*) (id,SEL))objc_msgSend;
+           id allocMap = allocAction(mapClass, NSSelectorFromString(@"alloc"));
+           
+           id (*initAction)(id,SEL,UIView*) = (id (*) (id,SEL,UIView*))objc_msgSend;
+           id mapObject = initAction(allocMap, NSSelectorFromString(@"initWithView:"),self.view);
+           
+           NSLog(@"mapObject=%@",mapObject);
+           
+           void (*setSourceAction)(id,SEL,int,NSString*,NSString*) = (void(*)(id,SEL,int,NSString*,NSString*))objc_msgSend;
+           setSourceAction(mapObject,@selector(setSourceWithType:source:url:),0,self.code,self.url);
+    
+       }
+    
+//    self.map.delegate = self;
     self.navigationController.navigationBarHidden  = false;
     
 }
 
 
--(void)centralManagerDidUpdateStateWithState:(enum BluetoothState)state
+-(void)centralManagerDidUpdateStateWithState:(NSInteger)state
 {
-    switch (state) {
-        case BluetoothStateUnauthorized:
-            NSLog(@"无权使用蓝牙");
-            break;
-            case BluetoothStatePoweredOff:
-            NSLog(@"蓝牙关闭");
-            break;
-            case BluetoothStatePoweredOn:
-            NSLog(@"蓝牙启动");
-            break;
-        default:
-            NSLog(@"蓝牙故障");
-            break;
-    }
+//    switch (state) {
+//        case BluetoothStateUnauthorized:
+//            NSLog(@"无权使用蓝牙");
+//            break;
+//            case BluetoothStatePoweredOff:
+//            NSLog(@"蓝牙关闭");
+//            break;
+//            case BluetoothStatePoweredOn:
+//            NSLog(@"蓝牙启动");
+//            break;
+//        default:
+//            NSLog(@"蓝牙故障");
+//            break;
+//    }
 }
 -(void)didMapReady {
     NSLog(@"map ready");
