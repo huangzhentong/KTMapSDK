@@ -15,8 +15,5 @@
 //输入结束点的坐标
 - (instancetype)initWithEndLatitude:(CGFloat)latitude longitude:(CGFloat)longitude;
 
-
-
-
 @end
 

@@ -85,10 +85,18 @@
     [self addListen];
 }
 -(void)addListen{
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inputInDoor) name:@"inputInDoor" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inputInDoor:) name:@"DMapLocationStatusChange" object:nil];
+}
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 //进入室入
--(void)inputInDoor{
+-(void)inputInDoor:(NSNotification*)notification{
+    
+    
+    //判断状态是否为1
     
     
 }
