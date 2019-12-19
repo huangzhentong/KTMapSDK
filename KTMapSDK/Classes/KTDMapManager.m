@@ -10,6 +10,7 @@
 #import "KTDMapViewController.h"
 #import "KTNaviWalkController.h"
 #import "KTNotifiction.h"
+#import <DMap/DMap-Swift.h>
 @interface KTDMapManager ()<DMapDelegate>
 @property(nonatomic,strong)DMap *map;
 @end

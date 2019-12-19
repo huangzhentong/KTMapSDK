@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <DMap/DMap-Swift.h>
+
 #import "KTNotifiction.h"
 
 
