@@ -7,6 +7,8 @@
 
 ## Example
 
+pod lib lint KTMapSDK.podspec --verbose --use-libraries --allow-warnings --no-clean
+
 pod spec lint KTMapSDK.podspec --verbose --use-libraries --allow-warnings --no-clean
 
 pod trunk push KTMapSDK.podspec --verbose --use-libraries --allow-warnings --no-clean
