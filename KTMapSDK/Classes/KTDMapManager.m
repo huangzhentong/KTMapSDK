@@ -38,8 +38,6 @@
         UIViewController *viewController = [UIApplication sharedApplication].keyWindow.rootViewController;
         
         self.map = [KTDMapManager createDMapView:viewController.view code:code url:url];
-
-        
         void(* statusEventAction)(id,SEL,void(^event)(NSDictionary<NSString*,id>*))=(void(*)(id,SEL,void(^event)(NSDictionary<NSString*,id>*)))objc_msgSend;
         __weak typeof(self) weakSelf = self;
         void(^statusEvent)(NSDictionary<NSString*,id>*)=^(NSDictionary<NSString *,id> * _Nullable dic){
@@ -48,24 +46,24 @@
             }
             else
             {
-               NSDictionary *data = dic[@"data"];
+                NSDictionary *data = dic[@"data"];
                 if (data) {
                     weakSelf.locateState = [data[@"value"] integerValue];
                 }
-
+                
                 [[NSNotificationCenter defaultCenter] postNotificationName:DMapLocationStatusChange object:@(weakSelf.locateState)];
             }
             NSLog(@"registerLocationStatusEventWithCb=%@",dic);
         };
         statusEventAction(self.map,NSSelectorFromString(@"registerLocationStatusEventWithCb:"),statusEvent);
         
-       
-       
+        
+        
     }
     else{
         void (*setSourceAction)(id,SEL,int,NSString*,NSString*) = (void(*)(id,SEL,int,NSString*,NSString*))objc_msgSend;
-               setSourceAction(self.map,@selector(setSourceWithType:source:url:),0,code,url);
-//        [self.map setSourceWithType:0 source:code url:url];
+        setSourceAction(self.map,NSSelectorFromString (@"setSourceWithType:source:url:"),0,code,url);
+      
     }
     
     
@@ -97,8 +95,14 @@
     {
         KTDMapViewController *dMap = [[KTDMapViewController alloc] initWithCode:self.code withURL:self.url];
         UIViewController *vc = dic[@"viewController"];
-        [vc presentViewController:dMap animated:true completion:nil];
-//        [vc.navigationController pushViewController:dMap animated:true];
+        if(vc.navigationController)
+        {
+            [vc.navigationController pushViewController:dMap animated:true];
+        }
+        else{
+            [vc presentViewController:dMap animated:true completion:nil];
+        }
+        
     }
     
     
@@ -111,14 +115,20 @@
     if (dic[@"viewController"] && dic[@"lat"] && dic[@"long"]) {
         CGFloat latitude = [dic[@"lat"] doubleValue];
         CGFloat longitude = [dic[@"long"] doubleValue];
-           
+        
         KTNaviWalkController *walkVC = [[KTNaviWalkController alloc] initWithEndLatitude:latitude longitude:longitude];
         UIViewController *vc = dic[@"viewController"];
-        [vc presentViewController:walkVC animated:true completion:nil];
-//        [vc.navigationController pushViewController:walkVC animated:true];
+        if(vc.navigationController)
+        {
+            [vc.navigationController pushViewController:walkVC animated:true];
+        }
+        else{
+            [vc presentViewController:walkVC animated:true completion:nil];
+        }
+        
     }
     NSLog(@"notification.object=%@",notification.object);
-   
+    
     
 }
 
@@ -128,11 +138,12 @@
 {
     
     if (self.map) {
-       if( [self.map respondsToSelector:@selector(dispose)])
-       {
-         void (*dispose)(id,SEL) = (void(*)(id,SEL))objc_msgSend;
-                     dispose(self.map,@selector(dispose));
-       }
+        if( [self.map respondsToSelector:NSSelectorFromString(@"dispose")])
+        {
+            void (*dispose)(id,SEL) = (void(*)(id,SEL))objc_msgSend;
+            dispose(self.map,NSSelectorFromString(@"dispose"));
+            self.map = nil;
+        }
     }
 }
 
@@ -152,7 +163,7 @@
         NSLog(@"mapObject=%@",mapObject);
         
         void (*setSourceAction)(id,SEL,int,NSString*,NSString*) = (void(*)(id,SEL,int,NSString*,NSString*))objc_msgSend;
-        setSourceAction(mapObject,@selector(setSourceWithType:source:url:),0,code,url);
+        setSourceAction(mapObject,NSSelectorFromString(@"setSourceWithType:source:url:"),0,code,url);
         return mapObject;
     }
     return nil;

@@ -7,8 +7,8 @@
 //
 
 #import "KTViewController.h"
-#import <KTMapSDK/KTDMapViewController.h>
-//#import <KTMapSDK/KTDMapManager.h>
+#import <KTMapSDK/KTDMapManager.h>
+#import <KTMapSDK/KTSDK.h>
 #import <objc/runtime.h>
 #import <objc/message.h>
 @interface KTViewController ()
@@ -26,7 +26,8 @@
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     
-    
+    [KTSDK presentSDK:self mapAPIKey:@"745dc31cded658ccfedfdc33684a75eb"];
+    return;
     
 //    Class aMapClass = NSClassFromString(@"KTDMapManager");
 //    if (aMapClass == nil) {
@@ -43,14 +44,13 @@
 //        initWithDMapWithCode(aMap,NSSelectorFromString(@"initWithDMapWithCode:url:"),@"hyjg",@"https://test.seeklane.com/test/hyjg/index.html");
 //    }
     
-//    KTDMapManager *manager = [KTDMapManager shareInstance];
-//    manager.code = @"hyjg";
-//    manager.url = @"https://test.seeklane.com/test/hyjg/index.html";
-//    [[NSNotificationCenter defaultCenter] postNotificationName:PushToDMapViewController object:@{@"viewController":self,@"long":@(1),@"lat":@(2)}];
-    KTDMapViewController *viewController =[[KTDMapViewController alloc] initWithCode:@"hyjg" withURL:@"https://test.seeklane.com/test/hyjg/index.html"];
-    [self presentViewController:viewController animated:true completion:nil];
+    KTDMapManager *manager = [KTDMapManager shareInstance];
+    manager.code = @"hyjg";
+    manager.url = @"https://test.seeklane.com/test/hyjg/index.html";
+    [[NSNotificationCenter defaultCenter] postNotificationName:PushToDMapViewController object:@{@"viewController":self,@"long":@(1),@"lat":@(2)}];
+//    KTDMapViewController *viewController =[[KTDMapViewController alloc] initWithCode:@"hyjg" withURL:@"https://test.seeklane.com/test/hyjg/index.html"];
+//    [self presentViewController:viewController animated:true completion:nil];
 
-//    [KTMapSDK presentSDK:self mapAPIKey:@""];
     
 }
 

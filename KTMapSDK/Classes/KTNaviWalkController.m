@@ -9,6 +9,7 @@
 #import "KTNaviWalkController.h"
 #import <MapKit/MapKit.h>
 #import <Masonry.h>
+#import "KTNotifiction.h"
 #import <AMapNaviKit/AMapNaviKit.h>
 
 @interface KTNaviWalkController ()<AMapNaviWalkManagerDelegate,AMapNaviWalkViewDelegate>
@@ -63,14 +64,15 @@
 -(void)closeBtnEvent
 {
     [self stopNavi];
-    [self.navigationController popViewControllerAnimated:true];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:PushToDMapViewController object:@{@"viewController":self,}];
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBarHidden = true;
-    [AMapServices sharedServices].apiKey = @"745dc31cded658ccfedfdc33684a75eb";
-    [AMapServices sharedServices].enableHTTPS = YES;
+   
     
     if([AMapServices sharedServices].apiKey.length < 1)
     {
@@ -82,7 +84,10 @@
     if(!self.endPoint)
         [self initProperties];
     [self.walkManager calculateWalkRouteWithEndPoints:@[self.endPoint]];
+    
     [self addListen];
+    
+    
 }
 -(void)addListen{
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(inputInDoor:) name:@"DMapLocationStatusChange" object:nil];
@@ -95,8 +100,12 @@
 //进入室入
 -(void)inputInDoor:(NSNotification*)notification{
     
-    
-    //判断状态是否为1
+    NSInteger status = [notification.object integerValue];
+    //判断状态是否为0
+    if (status == 0) {
+        self.endView.hidden = false;
+       
+    }
     
     
 }
@@ -137,6 +146,7 @@
 #pragma makr -
 - (void)walkViewCloseButtonClicked:(AMapNaviWalkView *)walkView
 {
+    self.navigationController.navigationBarHidden = false;
     [self.navigationController popViewControllerAnimated:true];
 }
 #pragma mark -
@@ -146,8 +156,9 @@
     NSLog(@"显示路径或开启导航");
     
     //显示路径或开启导航
-    BOOL isSuccess = [self.walkManager startEmulatorNavi];
+    BOOL isSuccess = [self.walkManager startGPSNavi];
     NSLog(@"isSuccess=%i",isSuccess);
+    
 
 }
 - (void)walkManager:(AMapNaviWalkManager *)walkManager onCalculateRouteFailure:(NSError *)error
