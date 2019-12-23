@@ -12,4 +12,9 @@
 {
     [KTMapFrameManager presentSDK:viewController mapAPIKey:apiKey];
 }
+//设置 debug模式 true 表示debug 模式，false 表示release
++(void)setDebugMode:(BOOL)isDebug
+{
+    [KTMapFrameManager setDebugMode:isDebug];
+}
 @end
