@@ -67,12 +67,21 @@
     
     [[NSNotificationCenter defaultCenter] postNotificationName:PushToDMapViewController object:@{@"viewController":self,}];
 }
-
+- (void)viewSafeAreaInsetsDidChange
+{
+//   self.view.safeAreaInsets
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
+     if (@available(iOS 11.0, *)) {
+         self.additionalSafeAreaInsets = UIEdgeInsetsMake(10, 0, 0, 34);
+     }
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBarHidden = true;
    
+    
+//
+    self.automaticallyAdjustsScrollViewInsets = NO;
     
     if([AMapServices sharedServices].apiKey.length < 1)
     {
@@ -119,7 +128,34 @@
         self.driveView.autoresizingMask = UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight;
         [self.driveView setDelegate:self];
         
+        
         [self.view addSubview:self.driveView];
+        
+        [self.driveView mas_makeConstraints:^(MASConstraintMaker *make) {
+            if (@available(iOS 11.0, *)) {
+                 make.top.equalTo(self.view.mas_safeAreaLayoutGuideTop);
+            } else {
+                 make.top.mas_equalTo(0);
+                // Fallback on earlier versions
+            }
+            make.left.equalTo(self.view.mas_left);
+            make.right.equalTo(self.view.mas_right);
+            if (@available(iOS 11.0, *)) {
+                make.bottom.equalTo(self.view.mas_safeAreaLayoutGuideBottom);
+                
+            } else {
+                 make.bottom.mas_equalTo(0);
+                // Fallback on earlier versions
+            }
+            
+        }];
+        
+//        if (@available(iOS 11, *)) {
+//
+//        } else {
+//
+//        }
+        
     }
 }
 - (void)initProperties
