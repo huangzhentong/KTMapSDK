@@ -80,9 +80,11 @@
             NSString *park = [model valueForKey:@"park"];
             NSLog(@"floor = %@|park=%@",floor,park);
             self.floor = floor;
-             self.park = park;
+            self.park = park;
         }
     }
+    
+
 }
 -(void)addBackBtn
 {
@@ -145,9 +147,13 @@
 }
 -(void)didMapReady {
     NSLog(@"map ready");
-    NSInteger (*bookParking)(id,SEL,NSString*,NSString*) = (NSInteger(*)(id,SEL,NSString*,NSString*))objc_msgSend;
-   NSInteger state =bookParking(self.map,NSSelectorFromString(@"bookParkingWithFloor:parkingNumber:"),self.floor,self.park);
-    NSLog(@"state=%li",(long)state);
+    
+    if(self.floor.length >=1 && self.park.length >= 1)
+    {
+        NSInteger (*bookParking)(id,SEL,NSString*,NSString*) = (NSInteger(*)(id,SEL,NSString*,NSString*))objc_msgSend;
+        NSInteger state =bookParking(self.map,NSSelectorFromString(@"bookParkingWithFloor:parkingNumber:"),self.floor,self.park);
+        NSLog(@"state=%li",(long)state);
+    }
 
     
 }

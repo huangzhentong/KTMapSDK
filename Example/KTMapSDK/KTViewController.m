@@ -27,13 +27,15 @@
 {
     
     [KTSDK presentSDK:self mapAPIKey:@"745dc31cded658ccfedfdc33684a75eb"];
+    [KTSDK setDebugMode:true];
     return;
     
     
-    KTDMapManager *manager = [KTDMapManager shareInstance];
-    manager.code = @"hyjg";
-    manager.url = @"https://test.seeklane.com/test/hyjg/index.html";
-    [[NSNotificationCenter defaultCenter] postNotificationName:PushToDMapViewController object:@{@"viewController":self,@"long":@(1),@"lat":@(2)}];
+//    KTDMapManager *manager = [KTDMapManager shareInstance];
+//    manager.code = @"hyjg";
+//    manager.url = @"https://test.seeklane.com/test/hyjg/index.html";
+//
+//    [[NSNotificationCenter defaultCenter] postNotificationName:PushToDMapViewController object:@{@"viewController":self,@"long":@(1),@"lat":@(2)}];
 
     
 }
