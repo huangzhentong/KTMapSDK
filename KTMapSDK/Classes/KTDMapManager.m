@@ -65,8 +65,11 @@
         setSourceAction(self.map,NSSelectorFromString (@"setSourceWithType:source:url:"),0,code,url);
       
     }
-    
-    
+}
+
++(void)load
+{
+    [KTDMapManager shareInstance];
 }
 
 -(instancetype)init

@@ -103,12 +103,17 @@
 -(void)backBtnEvent
 {
     NSArray *array = self.navigationController.viewControllers;
+    BOOL isCarInfo = false;
     for (UIViewController * vc in array) {
         if([NSStringFromClass( vc.class) isEqualToString:@"KTCarInfoViewController"])
         {
             [self.navigationController popToViewController:vc animated:false];
-            break;
+            isCarInfo = true;
+            return;
         }
+    }
+    if (!isCarInfo) {
+        [self.navigationController popViewControllerAnimated:true];
     }
        
    
