@@ -14,4 +14,4 @@
 
 #define DMapLocationStatusChange @"DMapLocationStatusChange"
 #define PushToDMapViewController @"PushToDMapViewController"
-#define PushToWalkViewController @"pushToWalkViewController"
+#define PushToWalkViewController @"PushToWalkViewController"
